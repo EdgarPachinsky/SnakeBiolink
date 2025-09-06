@@ -1,1 +1,345 @@
 /* You can add global styles to this file, and also import other style files */
+
+.ubuntu-light {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.ubuntu-regular {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.ubuntu-medium {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.ubuntu-bold {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.ubuntu-light-italic {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.ubuntu-regular-italic {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.ubuntu-medium-italic {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.ubuntu-bold-italic {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+html, body {
+  overflow: hidden;
+  height: 100%;
+  background: #000c;
+}
+body {
+
+  @extend .ubuntu-light-italic;
+  margin: 0; }
+
+.flex {
+  display: flex;
+}
+.flex-col {
+  flex-direction: column;
+}
+.flex-row {
+  flex-direction: row;
+}
+.justify-content-center {
+  justify-content: center;
+}
+.align-items-center{
+  align-items: center;
+}
+.w-full{
+  width: 100%;
+}
+.app-color-red{
+  color: rgb(186 0 92) !important;
+}
+.app-header{
+  font-family: "Ubuntu", sans-serif;
+  font-size: 20px;
+  color: white;
+}
+
+.ml-10{
+  margin-left: 10px;
+}
+.mr-10{
+  margin-right: 10px;
+}
+.mb-10{
+  margin-bottom: 10px;
+}
+.mt-10{
+  margin-top: 10px;
+}
+
+.level-component{
+  font-family: "Ubuntu", sans-serif;
+  font-size: 20px;
+  color: white;
+}
+
+.levels {
+  display:flex; width:100%; gap:16px;
+
+  .hidden{
+    opacity:0;
+  }
+}
+.levels app-level { flex:1 1 0; min-width:0; }
+app-level { display:block; } /* host element */
+
+
+.board-wrapper {
+  perspective: 750px; /* gives depth to the 3D effect */
+  width: max-content;   /* wrap tightly around the board */
+  margin: auto;
+}
+
+.levels-container{
+  display: flex;
+  justify-content: center;
+
+
+  .level-container{
+    position: relative;
+    display: inline-block;
+    transform-style: preserve-3d;
+    transform-origin: center center;
+    transition: transform 0.3s ease;
+
+    &.prev{
+      position: relative;
+      top: -107px;
+      left: 92px;
+      transform: rotateX(48deg) rotateY(-12deg) rotateZ(31deg);
+    }
+    &.current{
+      transform: rotateX(30deg) rotateY(-10deg) rotateZ(10deg);
+    }
+    &.next{
+      position: relative;
+      top: 28px;
+      left: -9px;
+      transform: rotateX(30deg) rotateY(7deg) rotateZ(-13deg);
+    }
+  }
+
+
+
+  .game-field{
+    box-shadow: 13px 13px 0 rgb(0 0 0);
+  }
+
+  .little-board-element{
+    width: 7px;
+    height: 7px;
+    margin: 1px;
+    border-radius: 2px;
+    background: rgb(0 0 0 / 47%);
+
+    &.snake-head{
+      background: radial-gradient(circle at 30% 30%, #ff2b9c, #ba005c 70%);
+      box-shadow: 0 0 5px rgba(181, 181, 181, 0.4);
+    }
+
+    &.snake-body{
+      background: radial-gradient(circle at 30% 30%, #ff1b85, #870041 70%);
+      box-shadow: 0 0 5px rgba(181, 181, 181, 0.4);
+    }
+
+    &.snake-food {
+      background: radial-gradient(circle at 30% 30%, #fff, #88ff88 70%);
+      border-radius: 50%;
+      box-shadow: 0 0 4px 1px rgba(136, 255, 136, 0.6),
+      0 0 8px 2px rgba(136, 255, 136, 0.4),
+      0 0 12px 3px rgba(136, 255, 136, 0.2);
+
+      animation: pulse 1s infinite alternate ease-in-out,
+      wobble 1.2s infinite ease-in-out;
+    }
+
+    &.store-power-up{
+      background: linear-gradient(135deg, #ffd700, #ff8c00); /* gold/orange gradient */
+      border-radius: 2px;
+      animation: pulseDot 1.2s infinite ease-in-out;
+    }
+
+    &.next-level-door {
+      background: radial-gradient(circle at center, #00ffcc 0%, #006666 100%);
+      border-radius: 50%;
+      box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc, 0 0 40px #00ffcc;
+      animation: portalSpin 2s linear infinite;
+    }
+    &.prev-level-door {
+      background: radial-gradient(circle at center, #aa00ff 0%, #330044 100%);
+      border-radius: 50%;
+      box-shadow: 0 0 8px #aa00ff, 0 0 16px #aa00ff, 0 0 32px #aa00ff;
+      animation: portalPulse 1.5s ease-in-out infinite;
+    }
+
+    &.wall{
+      background: repeating-linear-gradient(
+          45deg,
+          #444,
+          #444 10px,
+          #3a3a3a 10px,
+          #3a3a3a 20px
+      );
+      box-shadow:  0 0 15px rgb(163, 22, 22);
+    }
+  }
+}
+.d-flex{
+  display: flex;
+}
+.hint-container{
+  color: rgb(186 0 92) !important;
+}
+.hearts-container{
+  color: rgb(186 0 92) !important;
+}
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+
+@keyframes wobble {
+  0% { border-radius: 50% 0 55% 60%; }
+  25% { border-radius: 45% 65% 50% 0; }
+  50% { border-radius: 50% 0 45% 50%; }
+  75% { border-radius: 0 80% 50% 45%; }
+  100% { border-radius: 50% 45% 0 50%; }
+}
+
+.hearts-container .material-icons {
+  color: rgb(186 0 92) !important;
+  font-size: 24px;
+  display: inline-block;
+  transform-origin: center;
+  animation: heartbeat 1s infinite;
+}
+
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  14% { transform: scale(1.05); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.05); }
+  70% { transform: scale(1); }
+  100% { transform: scale(1); }
+}
+.game-controls{
+  position: absolute;
+  height: 100px;
+  z-index: 1;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  box-shadow: -13px 13px 0 rgb(0, 0, 0);
+  left: -186px;
+  top: 295px;
+  transform: rotate(-90deg);
+}
+.prev-level-hint{
+  position: absolute;
+  height: 100px;
+  z-index: 1;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  box-shadow: -13px 13px 0 rgb(0, 0, 0);
+  left: -134px;
+  bottom: 13px;
+  transform: rotate(-90deg);
+}
+.next-level-hint{
+  position: absolute;
+  height: 100px;
+  z-index: 1;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  box-shadow: -13px 13px 0 rgb(0, 0, 0);
+  right: -132px;
+  bottom: 10px;
+  transform: rotate(-90deg);
+}
+.game-store{
+  position: absolute;
+  width: 200px;
+  height: 100px;
+  z-index: 1;
+  border: 1px solid #000c;
+  box-shadow: -13px 13px 0 rgb(0 0 0);
+  left: -170px;
+  top: 50px;
+  transform: rotate(-90deg);
+  font-size: 35px;
+
+  .store-arrow{
+    position: absolute;
+    top: 85px;
+    bottom: -22px;
+    transform: rotate(-90deg);
+    animation: bounce 1s infinite ease-in-out;
+  }
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0) rotate(-90deg); }
+  50% { transform: translateY(-3px) rotate(-90deg); }
+}
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; }
+}
+
+@keyframes snakeHeadPulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 8px rgba(255, 43, 156, 0.6); }
+  50% { transform: scale(1.1); box-shadow: 0 0 15px rgba(255, 43, 156, 0.8); }
+}
+
+@keyframes snakeBodyPulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 5px rgba(255, 27, 133, 0.4); }
+  50% { transform: scale(1.05); box-shadow: 0 0 10px rgba(255, 27, 133, 0.6); }
+}
+
+
+.current-session-information {
+  position: absolute;
+  bottom: -80px;
+  left: 7px;
+  transform-style: preserve-3d;
+  transform: rotateX(-22deg) rotateY(0deg) rotateZ(0deg);
+  transform-origin: center center;
+  transition: transform 0.3s ease;
+}
+
+@keyframes portalSpin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.1); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+@keyframes portalPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(0.9); opacity: 0.8; }
+}

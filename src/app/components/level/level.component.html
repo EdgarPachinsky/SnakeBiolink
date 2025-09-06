@@ -1,0 +1,111 @@
+<div class="level-component">
+  <div class="levels-container">
+
+    <div class="board-wrapper">
+      <div class="level-container"
+           [ngClass]="{'current': type === 'current', 'prev': type === 'prev', 'next': type === 'next' }"
+      >
+
+        <div class="game-field">
+          @for (i of gameStateService.getBoardHeightArray(); track i) {
+            <div class="d-flex flex-row w-full">
+              @for (j of gameStateService.getBoardWidthArray(); track j) {
+                <div
+                  class="little-board-element"
+                  [ngClass]="{
+                    'snake-food': gameStateService.isFood(j,i, type),
+                    'wall': gameStateService.isWall(j,i, type),
+                    'snake-head': gameStateService.isSnakePart(j,i,'head', type),
+                    'snake-body': gameStateService.isSnakePart(j,i,'body', type),
+                    'store-power-up': gameStateService.isStore(j,i,'power-up', type),
+                    'next-level-door': gameStateService.isStore(j,i,'next-level', type),
+                    'prev-level-door': gameStateService.isStore(j,i,'prev-level', type),
+                  }"
+                ></div>
+              }
+            </div>
+          }
+        </div>
+
+
+        @if (type === 'current') {
+          <div class="flex-col flex current-session-information">
+            <div class="game-stats mt-10 flex flex-row align-items-center">
+              <div>Snake Lives</div>
+              <div class="flex flex-row ml-10 hearts-container">
+                @for (i of gameStateService.getSnakeLivesArray(); track i) {
+                  <span class="material-icons">
+                  favorite
+                </span>
+                }
+              </div>
+            </div>
+            <div class="flex flex-row">
+              <div>Biomass Points</div>
+              <div class="hint-container ml-10"><b>{{ gameStateService.snake.length }}</b></div>
+            </div>
+            <div class="flex flex-row">
+              <div>Level</div>
+              <div class="hint-container ml-10"><b>{{ gameStateService.currentLevel }}</b></div>
+            </div>
+          </div>
+
+          <div class="game-store flex align-items-center justify-content-center">
+            Store
+            <span class="material-icons app-color-red ml-10">
+            store
+          </span>
+            <div class="store-arrow">
+            <span class="material-icons">
+              double_arrow
+            </span>
+            </div>
+          </div>
+
+          <div class="game-controls flex align-items-center justify-content-center">
+            <button mat-button class="ml-10" (click)="gameStateService.startGame()"
+                    [disabled]="gameStateService.animationId">
+            <span class="material-icons">
+              play_arrow
+            </span>
+            </button>
+
+            <button mat-button class="ml-10" (click)="gameStateService.stopAnimation()"
+                    [disabled]="!gameStateService.animationId">
+            <span class="material-icons">
+              pause
+            </span>
+            </button>
+
+            <button mat-button class="ml-10 mr-10" (click)="refreshPage()">
+              <span class="material-icons">
+                cached
+              </span>
+            </button>
+          </div>
+
+          @if(gameStateService.currentLevel > 1){
+            <div class="prev-level-hint flex align-items-center justify-content-center">
+              <button mat-button class="ml-10 mr-10"  [matTooltip]="'Prev Level'">
+                Level <b>{{ gameStateService.currentLevel - 1 < 0 ? 0: gameStateService.currentLevel - 1 }}</b>
+                <span class="material-icons">
+                north
+              </span>
+              </button>
+            </div>
+          }
+
+
+          <div class="next-level-hint flex align-items-center justify-content-center">
+            <button mat-button class="ml-10 mr-10" (click)="refreshPage()" [matTooltip]="'Next Level'">
+              Level <b>{{ gameStateService.currentLevel + 1 }}</b>
+              <span class="material-icons">
+                south
+              </span>
+            </button>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
